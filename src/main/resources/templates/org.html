@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<body>
+<h1>Organization</h1>
+<p>Org ID: <span th:text="${org.id}"></span></p>
+
+<p>Name: <span th:text="${org.name}"></span></p>
+
+<p>Description: <span th:text="${org.description}"></span></p>
+
+<p>Address: </p>
+<div th:if="${org.address != null}">
+
+    <ul>
+        <li>
+
+            <p>Street: <span th:text="${org.address.street}"></span></p>
+
+        </li>
+        <li>
+            <p>City: <span th:text="${org.address.city}"></span></p>
+
+        </li>
+        <li>
+            <p>State: <span th:text="${org.address.state}"></span></p>
+
+        </li>
+        <li>
+            <p>Zip: <span th:text="${org.address.zip}"></span></p>
+
+        </li>
+    </ul>
+</div>
+
+<p>Persons:</p>
+<div th:if="${org.persons != null}">
+
+    <ul>
+        <li th:each="stat1 : ${org.persons}">
+            <div>
+                <p>ID: <span th:text="${stat1.id}"></span></p>
+
+            </div>
+        </li>
+    </ul>
+</div>
+
+
+</body>
+</html>
