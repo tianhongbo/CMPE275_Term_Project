@@ -6,8 +6,14 @@ import edu.sjsu.cmpe275.project.model.RESERVATION_STATUS;
 import edu.sjsu.cmpe275.project.model.Reservation;
 import edu.sjsu.cmpe275.project.model.Room;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
+import org.springframework.web.util.HtmlUtils;
 
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -32,6 +38,9 @@ public class ReservationService {
     RoomDao roomDao;
     @Autowired
     ReservationDao reservationDao;
+    @Autowired
+    private EmailService emailService;
+
 
     public Reservation confirm(Reservation reservation) {
         List<Room> roomList = new LinkedList<>();
@@ -48,6 +57,8 @@ public class ReservationService {
         //TODO: double check the room availability
         reservation = reservationDao.add(reservation);
 
+        //Send email to customer
+        emailService.sendConfirmation(reservation);
         return reservation;
     }
 
@@ -66,4 +77,6 @@ public class ReservationService {
     public Reservation get(Long id) {
         return reservationDao.get(id);
     }
+
+
 }

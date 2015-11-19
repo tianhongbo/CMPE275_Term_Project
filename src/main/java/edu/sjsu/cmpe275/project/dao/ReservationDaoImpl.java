@@ -107,7 +107,9 @@ public class ReservationDaoImpl implements ReservationDao {
             session = sessionFactory.openSession();
             transaction = session.beginTransaction();
             reservation = session.get(Reservation.class, id);
-            session.delete(reservation);
+            if (reservation != null) {
+                session.delete(reservation);
+            }
             transaction.commit();
         } catch (HibernateException e) {
             if (transaction != null) {

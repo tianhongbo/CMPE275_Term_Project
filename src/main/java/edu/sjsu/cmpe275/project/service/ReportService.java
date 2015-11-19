@@ -24,7 +24,7 @@ import java.util.Date;
  * PARTICULAR PURPOSE.
  */
 @Service
-public class DailyReport {
+public class ReportService {
 
     @Autowired
     RoomDao roomDao;
