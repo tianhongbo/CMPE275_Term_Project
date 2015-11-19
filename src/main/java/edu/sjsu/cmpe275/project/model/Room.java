@@ -1,5 +1,7 @@
 package edu.sjsu.cmpe275.project.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -34,17 +36,33 @@ public class Room {
     @Column(name = "BASE_PRICE", nullable = false)
     private Integer basePrice;
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinTable(name = "BOOKING",
-            joinColumns = {@JoinColumn(name = "ROOM_NO", referencedColumnName = "ROOM_NO")},
-                    inverseJoinColumns = {@JoinColumn(name = "RESERVATION_ID",referencedColumnName = "ID")})
+    @Column(name = "STATUS")
+    private ROOM_STATUS status;
+
+    @JsonIgnore
+    @ManyToMany(mappedBy = "roomList", fetch = FetchType.EAGER)
     private List<Reservation> reservationList;
+
+    public Room() {
+    }
+
+    public Room(String roomNo) {
+        this.roomNo = roomNo;
+    }
 
     public Room(String roomNo, Integer roomType, Boolean smoking, Integer basePrice) {
         this.roomNo = roomNo;
         this.roomType = roomType;
         this.smoking = smoking;
         this.basePrice = basePrice;
+    }
+
+    public ROOM_STATUS getStatus() {
+        return status;
+    }
+
+    public void setStatus(ROOM_STATUS status) {
+        this.status = status;
     }
 
     public List<Reservation> getReservationList() {
@@ -90,11 +108,12 @@ public class Room {
     @Override
     public String toString() {
         return "Room{" +
-                ", roomNo='" + roomNo + '\'' +
-                ", roomType='" + roomType + '\'' +
+                "roomNo='" + roomNo + '\'' +
+                ", roomType=" + roomType +
                 ", smoking=" + smoking +
                 ", basePrice=" + basePrice +
-                ", bookingList=" + reservationList +
+                ", status=" + status +
+                ", reservationList=" + reservationList +
                 '}';
     }
 }

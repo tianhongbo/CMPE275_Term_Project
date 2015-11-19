@@ -2,7 +2,6 @@ package edu.sjsu.cmpe275.project.service;
 
 import edu.sjsu.cmpe275.project.dao.ReservationDao;
 import edu.sjsu.cmpe275.project.dao.RoomDao;
-import edu.sjsu.cmpe275.project.model.Booking;
 import edu.sjsu.cmpe275.project.model.Reservation;
 import edu.sjsu.cmpe275.project.model.Room;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,6 +52,7 @@ public class SearchRoomAvailability {
         }
 
         if(result.size() < roomNum) {
+            //No enough vacant room for this query
             return null;
         }
         return result;
@@ -63,11 +63,15 @@ public class SearchRoomAvailability {
         if (reservations == null) {
             return true;
         }
+        //traverse all the reservation to check availability
         for (Reservation reservation : reservations) {
             Date inDate = reservation.getCheckinDate();
             Date outDate = reservation.getCheckoutDate();
-            if ((inDate.after(checkinDate) && inDate.before(checkoutDate)) ||
-            (outDate.after(checkinDate) && outDate.before(checkoutDate))){
+            if ((inDate.getTime() == checkinDate.getTime())
+                    || (outDate.getTime() == checkoutDate.getTime())
+                    || (inDate.after(checkinDate) && inDate.before(checkoutDate))
+                    || (outDate.after(checkinDate) && outDate.before(checkoutDate)))
+            {
                 return false;
             }
         }

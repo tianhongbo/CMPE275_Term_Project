@@ -1,10 +1,8 @@
 package edu.sjsu.cmpe275.project.controller;
 
 import edu.sjsu.cmpe275.project.dao.ReservationDao;
-import edu.sjsu.cmpe275.project.model.Address;
-import edu.sjsu.cmpe275.project.model.Booking;
-import edu.sjsu.cmpe275.project.model.Name;
-import edu.sjsu.cmpe275.project.model.Reservation;
+import edu.sjsu.cmpe275.project.model.*;
+import edu.sjsu.cmpe275.project.service.ReservationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,10 +13,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
- * Project Name: CMPE275_Lab
+ * Project Name: CMPE275_Term_Project
  * Packet Name: edu.sjsu.cmpe275.project.controller
  * Author: Scott
  * Created Date: 11/18/15 11:08 AM
@@ -36,7 +35,7 @@ import java.util.List;
 @RequestMapping("/api/v1/reservations")
 public class ReservationController {
     @Autowired
-    ReservationDao reservationDao;
+    ReservationService reservationService;
 
     /** Get all reservations
      * @return			void
@@ -45,7 +44,7 @@ public class ReservationController {
     @RequestMapping(value="", method = RequestMethod.GET)
     public ResponseEntity<?> createReservation() {
 
-        List<Reservation> reservations = reservationDao.getAllReservation();
+        List<Reservation> reservations = reservationService.getAll();
         if (reservations == null) {
             return  new ResponseEntity<Object>(HttpStatus.NOT_FOUND);
         } else {
@@ -90,15 +89,14 @@ public class ReservationController {
         reservation.setCheckoutDate(checkoutDate);
 
         //TODO
-        //how about status?
 
-        System.out.println(rooms);
-
+        List<Room> roomList = new LinkedList<>();
         for (String s : rooms) {
-            System.out.println(s);
+            roomList.add(new Room(s));
         }
+        reservation.setRoomList(roomList);
 
-        reservation = reservationDao.addReservation(reservation);
+        reservation = reservationService.confirm(reservation);
         if (reservation == null) {
             return  new ResponseEntity<Object>(HttpStatus.INTERNAL_SERVER_ERROR);
         } else {
@@ -114,7 +112,7 @@ public class ReservationController {
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ResponseEntity<?> getReservationJson(@PathVariable("id") Long reservationNo) {
 
-        Reservation reservation = reservationDao.getReservation(reservationNo);
+        Reservation reservation = reservationService.get(reservationNo);
         if(reservation == null) {
             return new ResponseEntity<Object>(null, HttpStatus.NOT_FOUND);
         } else {
@@ -145,7 +143,7 @@ public class ReservationController {
         //TODO
 
         Reservation reservation = new Reservation();
-        reservation = reservationDao.updateReservation(reservation);
+        reservation = reservationService.update(reservation);
         if (reservation == null){
             return new ResponseEntity<Object>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         } else {
@@ -161,7 +159,7 @@ public class ReservationController {
     @RequestMapping(value="/{id}", method = RequestMethod.DELETE)
     public ResponseEntity deleteReservation(@PathVariable("id") Long reservationNo) {
 
-        Reservation reservation = reservationDao.cancelReservation(reservationNo);
+        Reservation reservation = reservationService.cancel(reservationNo);
 
         if (reservation == null) {
             return new ResponseEntity(null, HttpStatus.NOT_FOUND);

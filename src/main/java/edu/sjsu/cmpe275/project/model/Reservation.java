@@ -1,5 +1,7 @@
 package edu.sjsu.cmpe275.project.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
@@ -46,15 +48,18 @@ public class Reservation {
     private Date checkoutDate;
 
     @Column(name = "STATUS")
-    private String status; //1(reserved), 2(canceled), 3(checked in), 4(checked out)
+    private RESERVATION_STATUS status;
 
-    @ManyToMany(mappedBy = "reservationList", fetch = FetchType.EAGER)
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinTable(name = "BOOKING",
+            joinColumns = {@JoinColumn(name = "RESERVATION_NO", referencedColumnName = "ID")},
+            inverseJoinColumns = {@JoinColumn(name = "ROOM_ID",referencedColumnName = "ROOM_NO")})
     private List<Room> roomList;
 
     public Reservation() {
     }
 
-    public Reservation(Name name, String email, String dlNo, Address billingAddress, Date checkinDate, Date checkoutDate, String status, List<Room> roomList) {
+    public Reservation(Name name, String email, String dlNo, Address billingAddress, Date checkinDate, Date checkoutDate, RESERVATION_STATUS status, List<Room> roomList) {
         this.name = name;
         this.email = email;
         this.dlNo = dlNo;
@@ -121,11 +126,11 @@ public class Reservation {
         this.checkoutDate = checkoutDate;
     }
 
-    public String getStatus() {
+    public RESERVATION_STATUS getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(RESERVATION_STATUS status) {
         this.status = status;
     }
 

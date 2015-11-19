@@ -14,8 +14,6 @@
         <property name="show_sql">true</property>
         <!-- DB schema will be updated if needed -->
         <!-- <property name="hbm2ddl.auto">update</property> -->
-        <mapping class="edu.sjsu.cmpe275.project.model.Person"/>
-        <mapping class="edu.sjsu.cmpe275.project.model.Organization"/>
         <mapping class="edu.sjsu.cmpe275.project.model.Room"/>
         <mapping class="edu.sjsu.cmpe275.project.model.Reservation"/>
         <mapping class="edu.sjsu.cmpe275.project.model.User"/>

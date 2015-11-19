@@ -28,7 +28,7 @@ public class ReservationDaoImpl implements ReservationDao {
     SessionFactory sessionFactory;
 
     @Override
-    public Reservation addReservation(Reservation reservation) {
+    public Reservation add(Reservation reservation) {
         Session session = null;
         Transaction transaction = null;
 
@@ -52,7 +52,7 @@ public class ReservationDaoImpl implements ReservationDao {
     }
 
     @Override
-    public List<Reservation> getAllReservation() {
+    public List<Reservation> getAll() {
         Session session = null;
         Transaction transaction = null;
         List<Reservation> reservations = null;
@@ -75,7 +75,7 @@ public class ReservationDaoImpl implements ReservationDao {
     }
 
     @Override
-    public Reservation getReservation(Long id) {
+    public Reservation get(Long id) {
         Session session = null;
         Transaction transaction = null;
         Reservation reservation = null;
@@ -98,7 +98,7 @@ public class ReservationDaoImpl implements ReservationDao {
     }
 
     @Override
-    public Reservation cancelReservation(Long id) {
+    public Reservation cancel(Long id) {
         Session session = null;
         Transaction transaction = null;
         Reservation reservation = null;
@@ -122,7 +122,7 @@ public class ReservationDaoImpl implements ReservationDao {
     }
 
     @Override
-    public Reservation updateReservation(Reservation reservation) {
+    public Reservation update(Reservation reservation) {
         Session session = null;
         Transaction transaction = null;
         Reservation oldReservation = null;

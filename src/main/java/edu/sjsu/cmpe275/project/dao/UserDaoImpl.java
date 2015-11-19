@@ -1,6 +1,5 @@
 package edu.sjsu.cmpe275.project.dao;
 
-import edu.sjsu.cmpe275.project.model.Booking;
 import edu.sjsu.cmpe275.project.model.User;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;

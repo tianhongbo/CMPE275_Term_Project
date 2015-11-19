@@ -20,9 +20,9 @@ import java.util.List;
  * PARTICULAR PURPOSE.
  */
 public interface ReservationDao {
-    public Reservation addReservation(Reservation reservation);
-    public List<Reservation> getAllReservation();
-    public Reservation getReservation(Long id);
-    public Reservation cancelReservation(Long id);
-    public Reservation updateReservation(Reservation reservation);
+    public Reservation add(Reservation reservation);
+    public List<Reservation> getAll();
+    public Reservation get(Long id);
+    public Reservation cancel(Long id);
+    public Reservation update(Reservation reservation);
 }

@@ -3,6 +3,7 @@ package edu.sjsu.cmpe275.project.controller;
 import edu.sjsu.cmpe275.project.dao.RoomDao;
 import edu.sjsu.cmpe275.project.model.Address;
 import edu.sjsu.cmpe275.project.model.Organization;
+import edu.sjsu.cmpe275.project.model.ROOM_STATUS;
 import edu.sjsu.cmpe275.project.model.Room;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 /**
- * Project Name: CMPE275_Lab
+ * Project Name: CMPE275_Term_Project
  * Packet Name: edu.sjsu.cmpe275.project.controller
  * Author: Scott
  * Created Date: 11/16/15 11:44 PM
@@ -66,6 +67,7 @@ public class RoomController {
                                           @RequestParam(value = "base_price", required = false) Integer basePrice) {
 
         Room room = new Room(roomNo, roomType, smoking, basePrice);
+        room.setStatus(ROOM_STATUS.VACANT);
         room = roomDao.addRoom(room);
         if (room == null) {
             return  new ResponseEntity<Object>(HttpStatus.BAD_REQUEST);
