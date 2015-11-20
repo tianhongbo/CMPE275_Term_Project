@@ -120,11 +120,12 @@ public class RoomDaoImpl implements RoomDao {
             if (room.getBasePrice() != null) {
                 roomOld.setBasePrice(room.getBasePrice());
             }
-
             if (room.getSmoking() != null) {
                 roomOld.setSmoking(room.getSmoking());
             }
-
+            if (room.getStatus() != null) {
+                roomOld.setStatus(room.getStatus());
+            }
             session.update(roomOld);
             transaction.commit();
 

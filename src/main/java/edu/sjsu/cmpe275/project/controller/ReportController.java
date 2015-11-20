@@ -1,13 +1,17 @@
 package edu.sjsu.cmpe275.project.controller;
 
+import edu.sjsu.cmpe275.project.model.RoomReportData;
 import edu.sjsu.cmpe275.project.service.ReportService;
+import edu.sjsu.cmpe275.project.util.DateTool;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.websocket.server.PathParam;
 import java.util.Date;
 
 /**
@@ -31,9 +35,20 @@ public class ReportController {
     @Autowired
     private ReportService reportService;
 
-    @RequestMapping(value = "/{date}")
-    public ResponseEntity<?> roomDailyReport(@PathVariable("date")Date date) {
+    @RequestMapping(value = "/daily")
+    public ResponseEntity<?> roomDailyReport(@RequestParam(value = "date", required = true) Date date) {
 
-        return new ResponseEntity(reportService.currentReport(date), HttpStatus.OK);
+        RoomReportData result = null;
+
+        Date today = new Date();
+        int i = DateTool.compare(date, today);
+        if (i == 0) {
+            result = reportService.currentReport(date);
+        } else if (i < 0) {
+            result = reportService.postRport(date);
+        } else {
+            result = reportService.futureReprot(date);
+        }
+        return new ResponseEntity(result, HttpStatus.OK);
     }
 }

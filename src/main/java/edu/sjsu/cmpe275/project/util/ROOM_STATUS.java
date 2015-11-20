@@ -1,10 +1,10 @@
-package edu.sjsu.cmpe275.project.model;
+package edu.sjsu.cmpe275.project.util;
 
 /**
  * Project Name: CMPE275_Lab
  * Packet Name: edu.sjsu.cmpe275.project.model
  * Author: Scott
- * Created Date: 11/18/15 1:53 PM
+ * Created Date: 11/18/15 1:50 PM
  * Copyright (c) 2015, 2015 All Right Reserved, http://sjsu.edu/
  * This source is subject to the GPL2 Permissive License.
  * Please see the License.txt file for more information.
@@ -15,10 +15,8 @@ package edu.sjsu.cmpe275.project.model;
  * IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
  * PARTICULAR PURPOSE.
  */
-public enum RESERVATION_STATUS {
-    INITIATED,
-    RESERVED,
-    CANCELED,
-    CHECKED_IN,
-    CHECKED_OUT
+public enum ROOM_STATUS {
+    REMOVED,
+    VACANT,
+    IN_SERVICE
 }

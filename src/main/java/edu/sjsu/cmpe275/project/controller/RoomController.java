@@ -1,16 +1,12 @@
 package edu.sjsu.cmpe275.project.controller;
 
 import edu.sjsu.cmpe275.project.dao.RoomDao;
-import edu.sjsu.cmpe275.project.model.Address;
-import edu.sjsu.cmpe275.project.model.Organization;
-import edu.sjsu.cmpe275.project.model.ROOM_STATUS;
+import edu.sjsu.cmpe275.project.util.ROOM_STATUS;
 import edu.sjsu.cmpe275.project.model.Room;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

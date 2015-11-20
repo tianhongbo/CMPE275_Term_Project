@@ -1,6 +1,6 @@
 package edu.sjsu.cmpe275.project.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import edu.sjsu.cmpe275.project.util.RESERVATION_STATUS;
 
 import javax.persistence.*;
 import java.util.Date;
