@@ -34,6 +34,8 @@ public class OrderService {
     private RoomDao roomDao;
     @Autowired
     private ReservationDao reservationDao;
+    @Autowired
+    private EmailService emailService;
 
     public Reservation get(Long id) {
         Reservation r = reservationDao.get(id);
@@ -90,6 +92,7 @@ public class OrderService {
         }
         reservationDao.update(reservation);
 
+        emailService.sentReceipt(reservation);
         return reservation;
     }
 }

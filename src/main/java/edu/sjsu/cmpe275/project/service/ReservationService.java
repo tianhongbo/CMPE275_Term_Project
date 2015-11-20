@@ -53,6 +53,8 @@ public class ReservationService {
 
         //Send email to customer
         emailService.sendConfirmation(reservation);
+        //TODO
+        emailService.sentReceipt(reservation);
         return reservation;
     }
 
