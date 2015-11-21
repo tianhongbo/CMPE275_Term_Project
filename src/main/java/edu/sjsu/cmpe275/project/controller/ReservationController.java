@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -151,7 +152,7 @@ public class ReservationController {
         }
     }
 
-    /** Delete a reservation object
+    /** cancel a reservation
      * @param reservationNo			Reservation No
      * @return			void
      */
@@ -168,5 +169,16 @@ public class ReservationController {
         }
     }
 
+    //cancel by user via link in the reservation confirmation email
+    @RequestMapping(value = "/{id}/cancel", method = RequestMethod.GET)
+    public String cancelReservationByUser(@PathVariable("id") Long id, Model model) {
+        Reservation reservation = reservationService.cancel(id);
+        if (reservation == null) {
+            return "error404";
+        }else {
+            model.addAttribute("reservation", reservation);
+            return "cancelreservation";
+        }
+    }
 
 }

@@ -108,6 +108,7 @@ public class ReservationDaoImpl implements ReservationDao {
             transaction = session.beginTransaction();
             reservation = session.get(Reservation.class, id);
             if (reservation != null) {
+                reservation.setRoomList(null);
                 session.delete(reservation);
             }
             transaction.commit();

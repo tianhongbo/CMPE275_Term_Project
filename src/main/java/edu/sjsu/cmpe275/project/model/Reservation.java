@@ -47,6 +47,9 @@ public class Reservation {
     @Column(name = "CHECKOUT_DATE")
     private Date checkoutDate;
 
+    @Column(name = "DISCOUNT")
+    private Integer discount;
+
     @Column(name = "STATUS")
     private RESERVATION_STATUS status;
 
@@ -59,15 +62,24 @@ public class Reservation {
     public Reservation() {
     }
 
-    public Reservation(Name name, String email, String dlNo, Address billingAddress, Date checkinDate, Date checkoutDate, RESERVATION_STATUS status, List<Room> roomList) {
+    public Reservation(Name name, String email, String dlNo, Address billingAddress, Date checkinDate, Date checkoutDate, Integer discount, RESERVATION_STATUS status, List<Room> roomList) {
         this.name = name;
         this.email = email;
         this.dlNo = dlNo;
         this.billingAddress = billingAddress;
         this.checkinDate = checkinDate;
         this.checkoutDate = checkoutDate;
+        this.discount = discount;
         this.status = status;
         this.roomList = roomList;
+    }
+
+    public Integer getDiscount() {
+        return discount;
+    }
+
+    public void setDiscount(Integer discount) {
+        this.discount = discount;
     }
 
     public long getId() {
@@ -152,8 +164,9 @@ public class Reservation {
                 ", billingAddress=" + billingAddress +
                 ", checkinDate=" + checkinDate +
                 ", checkoutDate=" + checkoutDate +
-                ", status='" + status + '\'' +
-                ", bookingList=" + roomList +
+                ", discount=" + discount +
+                ", status=" + status +
+                ", roomList=" + roomList +
                 '}';
     }
 }

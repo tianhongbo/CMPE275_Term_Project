@@ -4,6 +4,7 @@ import edu.sjsu.cmpe275.project.dao.ReservationDao;
 import edu.sjsu.cmpe275.project.dao.RoomDao;
 import edu.sjsu.cmpe275.project.model.Reservation;
 import edu.sjsu.cmpe275.project.model.Room;
+import edu.sjsu.cmpe275.project.util.HtmlPageComposor;
 import edu.sjsu.cmpe275.project.util.RESERVATION_STATUS;
 import edu.sjsu.cmpe275.project.util.ROOM_STATUS;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -91,8 +92,8 @@ public class OrderService {
             roomDao.updateRoom(room);
         }
         reservationDao.update(reservation);
-
-        emailService.sentReceipt(reservation);
+        String page = HtmlPageComposor.orderReceipt(reservation);
+        emailService.send(reservation, page);
         return reservation;
     }
 }

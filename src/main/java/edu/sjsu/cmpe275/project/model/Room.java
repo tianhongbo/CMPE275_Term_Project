@@ -37,6 +37,9 @@ public class Room {
     @Column(name = "BASE_PRICE", nullable = false)
     private Integer basePrice;
 
+    @Column(name = "NUM_LIVING")
+    private Integer numOfliving;
+
     @Column(name = "STATUS")
     private ROOM_STATUS status;
 
@@ -56,6 +59,14 @@ public class Room {
         this.roomType = roomType;
         this.smoking = smoking;
         this.basePrice = basePrice;
+    }
+
+    public Integer getNumOfliving() {
+        return numOfliving;
+    }
+
+    public void setNumOfliving(Integer numOfliving) {
+        this.numOfliving = numOfliving;
     }
 
     public ROOM_STATUS getStatus() {
@@ -113,6 +124,7 @@ public class Room {
                 ", roomType=" + roomType +
                 ", smoking=" + smoking +
                 ", basePrice=" + basePrice +
+                ", numOfliving=" + numOfliving +
                 ", status=" + status +
                 ", reservationList=" + reservationList +
                 '}';

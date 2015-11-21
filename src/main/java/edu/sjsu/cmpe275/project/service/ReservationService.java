@@ -2,6 +2,7 @@ package edu.sjsu.cmpe275.project.service;
 
 import edu.sjsu.cmpe275.project.dao.ReservationDao;
 import edu.sjsu.cmpe275.project.dao.RoomDao;
+import edu.sjsu.cmpe275.project.util.HtmlPageComposor;
 import edu.sjsu.cmpe275.project.util.RESERVATION_STATUS;
 import edu.sjsu.cmpe275.project.model.Reservation;
 import edu.sjsu.cmpe275.project.model.Room;
@@ -52,9 +53,8 @@ public class ReservationService {
         reservation = reservationDao.add(reservation);
 
         //Send email to customer
-        emailService.sendConfirmation(reservation);
-        //TODO
-        emailService.sentReceipt(reservation);
+        String page = HtmlPageComposor.reservationConfirmation(reservation);
+        emailService.send(reservation, page);
         return reservation;
     }
 
