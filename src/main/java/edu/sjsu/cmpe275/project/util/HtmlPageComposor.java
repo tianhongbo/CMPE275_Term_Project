@@ -39,15 +39,17 @@ public class HtmlPageComposor {
 
     public static String orderReceipt(Reservation reservation) {
         //TODO: discount + total fee
-        String bill = null;
+        String bill = "";
+        int total = 0;
+
         SimpleDateFormat sdf = new SimpleDateFormat("MM/DD/YYYY");
         Date date = reservation.getCheckinDate();
-        bill += "<table border='1' style='width:100%'>";
+        bill = "<table border='1' style='width:100%'>";
         bill += "<tr>";
         bill += "<td>Date</td>";
         bill += "<td>Room No</td>";
         bill += "<td>Base Price</td>";
-        bill += "<td>Discount</td>";
+        bill += "<td>Discount(%)</td>";
         bill += "<td>Final Fee</td>";
         bill += "</tr>";
         while (date.before(reservation.getCheckoutDate())) {
@@ -57,8 +59,10 @@ public class HtmlPageComposor {
                 bill += "<td>" + sdf.format(date) + "</td>";
                 bill += "<td>" + room.getRoomNo() + "</td>";
                 bill += "<td>" + room.getBasePrice() + "</td>";
-                bill += "<td>" + room.getStatus() + "</td>";
-                bill += "<td>" + room.getBasePrice() + "</td>";
+                bill += "<td>" + reservation.getDiscount() + "</td>";
+                int fee = room.getBasePrice()*(100-reservation.getDiscount())/100;
+                total += fee;
+                bill += "<td>" + fee + "</td>";
                 bill += "</tr>";
             }
             //increase one day
@@ -68,10 +72,11 @@ public class HtmlPageComposor {
             date = c.getTime();
         }
         bill += "</table>";
+        bill += "<h3 align='right'>Total($): " + total + "</h3>";
 
         String page = "<html><body>"
                 + "<h3>Dear "+ reservation.getName().getFname() + ",</h3>"
-                + "<h3>Thanks for your choosing us serving you! Your room(s) have been checked out.</h3>"
+                + "<h3>Thank you for choosing us serving you! Your room(s) have been checked out.</h3>"
                 + "<h3>Here is the detail of bill:</h3>"
                 + bill
                 + "<h3>Regards,</h3>"

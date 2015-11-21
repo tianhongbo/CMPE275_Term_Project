@@ -78,6 +78,7 @@ public class ReservationController {
                                                @RequestParam(value = "zip", required = true) String zip,
                                                @RequestParam(value = "checkin_date", required = true) Date checkinDate,
                                                @RequestParam(value = "checkout_date", required = true) Date checkoutDate,
+                                               @RequestParam(value = "discount", required = false) Integer discount,
                                                @RequestParam(value = "rooms", required = true) List<String> rooms) {
 
 
@@ -88,8 +89,11 @@ public class ReservationController {
         reservation.setBillingAddress(new Address(street, city, state, zip));
         reservation.setCheckinDate(checkinDate);
         reservation.setCheckoutDate(checkoutDate);
-
-        //TODO
+        if (discount == null) {
+            reservation.setDiscount(0);
+        } else {
+            reservation.setDiscount(discount);
+        }
 
         List<Room> roomList = new LinkedList<>();
         for (String s : rooms) {
@@ -139,6 +143,7 @@ public class ReservationController {
                                                @RequestParam(value = "city", required = true) String city,
                                                @RequestParam(value = "state", required = true) String state,
                                                @RequestParam(value = "zip", required = true) String zip,
+                                               @RequestParam(value = "discount", required = false) Integer discount,
                                                @RequestParam(value = "rooms", required = true) List<String> rooms) {
 
         //TODO

@@ -52,9 +52,11 @@ public class ReservationService {
         //TODO: double check the room availability
         reservation = reservationDao.add(reservation);
 
-        //Send email to customer
-        String page = HtmlPageComposor.reservationConfirmation(reservation);
-        emailService.send(reservation, page);
+        if (reservation != null) {
+            //If reservation is NOT null, which means success. Send email to customer
+            String page = HtmlPageComposor.reservationConfirmation(reservation);
+            emailService.send(reservation, page);
+        }
         return reservation;
     }
 
@@ -67,6 +69,10 @@ public class ReservationService {
     }
 
     public Reservation cancel(Long id) {
+        Reservation reservation = reservationDao.get(id);
+        if (reservation.getStatus() != RESERVATION_STATUS.RESERVED) {
+            return null;
+        }
         return reservationDao.cancel(id);
     }
 
