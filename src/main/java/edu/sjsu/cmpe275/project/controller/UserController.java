@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.List;
+
 /**
  * Project Name: CMPE275_Lab
  * Packet Name: edu.sjsu.cmpe275.project.controller
@@ -34,6 +36,20 @@ public class UserController {
     UserDao userDao;
 
 
+    /** get all users
+     * @return			void
+     */
+
+    @RequestMapping(value="", method = RequestMethod.GET)
+    public ResponseEntity<?> getUsers() {
+
+        List<User> users = userDao.getAllUsers();
+        if (users == null) {
+            return  new ResponseEntity<Object>(HttpStatus.BAD_REQUEST);
+        } else {
+            return new ResponseEntity<Object>(users, HttpStatus.OK);
+        }
+    }
     /** Create a user
      * @param name			Account Name
      * @param password			Password

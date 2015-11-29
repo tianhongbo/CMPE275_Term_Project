@@ -1,6 +1,7 @@
 package edu.sjsu.cmpe275.project.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import edu.sjsu.cmpe275.project.util.ROOM_STATUS;
 
 import javax.persistence.*;
@@ -26,22 +27,32 @@ import java.util.List;
 public class Room {
     @Id
     @Column(name = "ROOM_NO", nullable = false, unique = true)
+    @JsonProperty(value = "room_number")
     private String roomNo;
 
     @Column(name = "ROOM_TYPE", nullable = false)
+    @JsonProperty(value = "room_type")
     private Integer roomType; //1-two queen beds, 2-one king bed
 
     @Column(name = "SMOKING", nullable = false)
+    @JsonProperty(value = "smoking")
     private Boolean smoking;
 
     @Column(name = "BASE_PRICE", nullable = false)
+    @JsonIgnore
     private Integer basePrice;
 
     @Column(name = "NUM_LIVING")
+    @JsonIgnore
     private Integer numOfliving;
 
     @Column(name = "STATUS")
+    @JsonIgnore
     private ROOM_STATUS status;
+
+    @Column(name = "CHOSEN")
+    @JsonProperty(value = "chosen")
+    private boolean chosen=false;
 
     @JsonIgnore
     @ManyToMany(mappedBy = "roomList", fetch = FetchType.EAGER)

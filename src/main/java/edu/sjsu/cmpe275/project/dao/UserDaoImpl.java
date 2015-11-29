@@ -1,12 +1,11 @@
 package edu.sjsu.cmpe275.project.dao;
 
 import edu.sjsu.cmpe275.project.model.User;
-import org.hibernate.HibernateException;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
+import org.hibernate.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 /**
  * Project Name: CMPE275_Lab
@@ -76,6 +75,29 @@ public class UserDaoImpl implements UserDao {
         return user;
     }
 
+    @Override
+    public List<User> getAllUsers() {
+        Transaction transaction = null;
+        Session session = null;
+        List<User> users = null;
+
+        try {
+            session = sessionFactory.openSession();
+            transaction = session.beginTransaction();
+            Query query = session.createQuery("from User");
+            users = query.list();
+            transaction.commit();
+        } catch (HibernateException e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+        }
+        return users;
+    }
     @Override
     public User updateUser(User user) {
         Session session = null;

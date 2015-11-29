@@ -46,11 +46,11 @@ public class HtmlPageComposor {
         Date date = reservation.getCheckinDate();
         bill = "<table border='1' style='width:100%'>";
         bill += "<tr>";
-        bill += "<td>Date</td>";
-        bill += "<td>Room No</td>";
-        bill += "<td>Base Price</td>";
-        bill += "<td>Discount(%)</td>";
-        bill += "<td>Final Fee</td>";
+        bill += "<th>Date</th>";
+        bill += "<th>Room No</th>";
+        bill += "<th>Base Price</th>";
+        bill += "<th>Discount(%)</th>";
+        bill += "<th>Final Fee</th>";
         bill += "</tr>";
         while (date.before(reservation.getCheckoutDate())) {
 

@@ -1,5 +1,7 @@
 package edu.sjsu.cmpe275.project.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -25,12 +27,15 @@ public class User {
 
     @Id
     @Column(name = "NAME", unique = true, nullable = false)
+    @JsonProperty(value = "username")
     private String name;
 
     @Column(name = "PASSWORD", nullable = false)
+    @JsonIgnore
     private String password;
 
     @Column(name = "ROLE")
+    @JsonProperty(value = "usertype")
     private String role; //"admin", "agent", "guest"
 
     public User() {

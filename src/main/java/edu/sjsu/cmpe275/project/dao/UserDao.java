@@ -2,6 +2,8 @@ package edu.sjsu.cmpe275.project.dao;
 
 import edu.sjsu.cmpe275.project.model.User;
 
+import java.util.List;
+
 /**
  * Project Name: CMPE275_Lab
  * Packet Name: edu.sjsu.cmpe275.project.dao
@@ -22,4 +24,5 @@ public interface UserDao {
     public User removeUser(String name);
     public User updateUser(User user);
     public User getUser(String name);
+    public List<User> getAllUsers();
 }

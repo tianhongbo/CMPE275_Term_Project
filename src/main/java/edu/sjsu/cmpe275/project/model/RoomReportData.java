@@ -1,5 +1,7 @@
 package edu.sjsu.cmpe275.project.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 /**
  * Project Name: CMPE275_Lab
  * Packet Name: edu.sjsu.cmpe275.project.model
@@ -16,17 +18,24 @@ package edu.sjsu.cmpe275.project.model;
  * PARTICULAR PURPOSE.
  */
 public class RoomReportData {
+
+    @JsonProperty(value = "in_service")
     private int numOfInservice;
+    @JsonProperty(value = "vacant")
     private int numOfVacant;
+    @JsonProperty(value = "under_reservation")
     private int numOfReserved;
+    @JsonProperty(value = "available")
+    private int numOfAvailable;
 
     public RoomReportData() {
     }
 
-    public RoomReportData(int numOfReserved, int numOfInservice, int numOfVacant) {
+    public RoomReportData(int numOfReserved, int numOfInservice, int numOfVacant, int numOfAvailable) {
         this.numOfReserved = numOfReserved;
         this.numOfInservice = numOfInservice;
         this.numOfVacant = numOfVacant;
+        this.numOfAvailable = numOfAvailable;
     }
 
     public int getNumOfInservice() {
@@ -53,12 +62,21 @@ public class RoomReportData {
         this.numOfReserved = numOfReserved;
     }
 
+    public int getNumOfAvailable() {
+        return numOfAvailable;
+    }
+
+    public void setNumOfAvailable(int numOfAvailable) {
+        this.numOfAvailable = numOfAvailable;
+    }
+
     @Override
     public String toString() {
         return "RoomReportData{" +
                 "numOfInservice=" + numOfInservice +
                 ", numOfVacant=" + numOfVacant +
                 ", numOfReserved=" + numOfReserved +
+                ", numOfAvailable=" + numOfAvailable +
                 '}';
     }
 }
