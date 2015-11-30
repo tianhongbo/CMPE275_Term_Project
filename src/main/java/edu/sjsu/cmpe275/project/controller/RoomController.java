@@ -26,6 +26,7 @@ import java.util.List;
  * IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
  * PARTICULAR PURPOSE.
  */
+@CrossOrigin
 @Controller
 @RequestMapping("/api/v1/rooms")
 public class RoomController {
