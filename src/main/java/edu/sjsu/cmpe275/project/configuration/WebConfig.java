@@ -31,5 +31,7 @@ public class WebConfig extends WebMvcConfigurerAdapter {
                 mediaType("json", MediaType.APPLICATION_JSON).
                 mediaType("html", MediaType.TEXT_HTML);
 
+
     }
+
 }

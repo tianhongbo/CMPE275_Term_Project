@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+
 import java.util.List;
 
 /**
@@ -28,6 +29,7 @@ import java.util.List;
  * IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
  * PARTICULAR PURPOSE.
  */
+
 @Controller
 @RequestMapping("/api/v1/users")
 public class UserController {
@@ -44,6 +46,7 @@ public class UserController {
     public ResponseEntity<?> getUsers() {
 
         List<User> users = userDao.getAllUsers();
+
         if (users == null) {
             return  new ResponseEntity<Object>(HttpStatus.BAD_REQUEST);
         } else {
@@ -76,6 +79,7 @@ public class UserController {
      * @return			void
      */
 
+
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ResponseEntity<?> getUserJson(@PathVariable("id") String name) {
 
@@ -89,8 +93,6 @@ public class UserController {
 
 
     /** Update a user
-     * @param a			Description of a
-     * @param b			Description of b
      * @return			Description of c
      */
 
@@ -109,7 +111,6 @@ public class UserController {
     }
 
     /** Delete a user object
-     * @param userNo			User No
      * @return			void
      */
 
