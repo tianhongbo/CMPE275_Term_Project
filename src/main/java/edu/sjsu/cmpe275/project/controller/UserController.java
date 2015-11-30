@@ -91,8 +91,6 @@ public class UserController {
         }
     }
 
-    
-
     /** Update a user
      * @return			Description of c
      */
