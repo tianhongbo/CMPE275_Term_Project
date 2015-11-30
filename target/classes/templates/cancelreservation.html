@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<body>
+<h1>Your room reservation has been canceled!</h1>
+
+<p>Rerservation ID: <span th:text="${reservation.id}"></span></p>
+<p>Name: </p>
+<div th:if="${reservation.name != null}">
+    <ul>
+        <li>
+            <p>First Name: <span th:text="${reservation.name.fname}"></span></p>
+        </li>
+        <li>
+            <p>Middle Name: <span th:text="${reservation.name.midname}"></span></p>
+        </li>
+        <li>
+            <p>Last Name: <span th:text="${reservation.name.lname}"></span></p>
+        </li>
+    </ul>
+</div>
+<p>Email: <span th:text="${reservation.email}"></span></p>
+<p>Driver License: <span th:text="${reservation.dlNo}"></span></p>
+<p>Checkin Date: <span th:text="${reservation.checkinDate}"></span></p>
+<p>Checkout Date: <span th:text="${reservation.checkoutDate}"></span></p>
+
+<!--<p>Address: <span th:text="${reservation.address}"></span></p>-->
+<!--<p>Address: <span th:text="${reservation.address.state}"></span></p>-->
+<p>Billing Address: </p>
+<div th:if="${reservation.billingAddress != null}">
+    <ul>
+        <li>
+            <p>Street: <span th:text="${reservation.billingAddress.street}"></span></p>
+        </li>
+        <li>
+            <p>City: <span th:text="${reservation.billingAddress.city}"></span></p>
+        </li>
+        <li>
+            <p>State: <span th:text="${reservation.billingAddress.state}"></span></p>
+        </li>
+        <li>
+            <p>Zip: <span th:text="${reservation.billingAddress.zip}"></span></p>
+        </li>
+    </ul>
+</div>
+
+<p>Rooms: </p>
+<div th:if="${reservation.roomList != null}">
+    <ul>
+        <li th:each="stat1 : ${reservation.roomList}" >
+            <div>
+                <p>Room No: <span th:text="${stat1.roomNo}"></span></p>
+
+            </div>
+        </li>
+    </ul>
+</div>
+
+
+<!--<p>Friends: <span th:text="${reservation.friends}"></span></p>-->
+
+
+</body>
+</html>

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<body>
+<h1>Person</h1>
+
+<p>ID: <span th:text="${person.id}"></span></p>
+
+
+<p>First Name: <span th:text="${person.firstname}"></span></p>
+
+<p>Last Name: <span th:text="${person.lastname}"></span></p>
+
+<p>Email: <span th:text="${person.email}"></span></p>
+
+<p>Description: <span th:text="${person.description}"></span></p>
+
+
+<!--<p>Organization: <span th:text="${person.org}"></span></p>-->
+
+<!--<p>Address: <span th:text="${person.address}"></span></p>-->
+<!--<p>Address: <span th:text="${person.address.state}"></span></p>-->
+<p>Address: </p>
+<div th:if="${person.address != null}">
+
+   <ul>
+      <li>
+
+            <p>Street: <span th:text="${person.address.street}"></span></p>
+
+      </li>
+      <li>
+         <p>City: <span th:text="${person.address.city}"></span></p>
+
+      </li>
+      <li>
+         <p>State: <span th:text="${person.address.state}"></span></p>
+
+      </li>
+      <li>
+         <p>Zip: <span th:text="${person.address.zip}"></span></p>
+
+      </li>
+   </ul>
+</div>
+
+<p>Organization: </p>
+<div th:if="${person.org != null}">
+
+   <ul>
+      <li>
+
+         <p>Org ID: <span th:text="${person.org.id}"></span></p>
+      </li>
+
+      <li>
+         <p>Name: <span th:text="${person.org.name}"></span></p>
+      </li>
+
+      <li>
+         <p>Description: <span th:text="${person.org.description}"></span></p>
+      </li>
+
+
+      <li>
+         <div>
+            <p>Address:</p>
+
+            <div th:if="${person.org.address != null}">
+
+               <ul>
+                  <li>
+
+                     <p>Street: <span th:text="${person.org.address.street}"></span></p>
+
+                  </li>
+                  <li>
+                     <p>City: <span th:text="${person.org.address.city}"></span></p>
+
+                  </li>
+                  <li>
+                     <p>State: <span th:text="${person.org.address.state}"></span></p>
+
+                  </li>
+                  <li>
+                     <p>Zip: <span th:text="${person.org.address.zip}"></span></p>
+
+                  </li>
+               </ul>
+            </div>
+
+         </div>
+      </li>
+
+      <li>
+         <div>
+
+            <p>Persons:</p>
+             <div th:if="${person.org.persons != null}">
+
+               <ul>
+                  <li th:each="stat1 : ${person.org.persons}" >
+                     <div>
+                        <p>ID: <span th:text="${stat1.id}"></span></p>
+
+                     </div>
+                  </li>
+               </ul>
+            </div>
+
+
+
+         </div>
+
+
+      </li>
+
+   </ul>
+</div>
+
+
+<p>Friends:</p>
+<div th:object="${person}">
+
+   <ul>
+      <li th:each="stat : *{friends}" >
+         <div th:if="${stat != null}">
+            <p>ID: <span th:text="${stat.id}"></span></p>
+
+         </div>
+      </li>
+   </ul>
+</div>
+
+<!--<p>Friends: <span th:text="${person.friends}"></span></p>-->
+
+
+
+</body>
+</html>
